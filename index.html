@@ -260,7 +260,31 @@ button:hover {
 </head>
 
 <body>
+<div id="musica" style="position:fixed;top:15px;right:15px;z-index:1000;">
+  <button onclick="activarMusica()" style="margin:0;padding:12px;font-size:12px;">
+    🎵 ACTIVAR MÚSICA
+  </button>
+</div>
 
+<div id="reproductor" style="position:fixed;width:1px;height:1px;overflow:hidden;top:-10px;">
+  <iframe
+    id="youtube"
+    title="Música de Stray Kids"
+    width="1"
+    height="1"
+    src=""
+    allow="autoplay; encrypted-media"
+    referrerpolicy="strict-origin-when-cross-origin">
+  </iframe>
+</div>
+
+<script>
+function activarMusica() {
+  document.getElementById("youtube").src =
+    "https://www.youtube.com/embed/TQTlCHxyuu8?autoplay=1&loop=1&playlist=TQTlCHxyuu8";
+  document.querySelector("#musica button").textContent = "🎵 MÚSICA ACTIVADA";
+}
+</script>
 <canvas id="particulas"></canvas>
 
 <div class="progreso"><div id="barra"></div></div>
