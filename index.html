@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una sorpresa para Gaby ❤️🖤</title>
+
+<style>
+:root {
+    --rojo: #ff1238;
+    --negro: #080808;
+    --blanco: #fff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.pantalla {
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pantalla.activa {
+    display: flex;
+    animation: aparecer 1s ease;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(1.03); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.fondo {
+    background:
+        radial-gradient(ellipse at center, #39000c 0%, #130006 45%, #050505 100%);
+}
+
+.lineas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 49px,
+        rgba(255,18,56,.07) 50px
+    );
+}
+
+.etiqueta {
+    color: var(--rojo);
+    letter-spacing: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: clamp(35px, 9vw, 76px);
+    line-height: 1.05;
+    margin: 10px 0 20px;
+    text-transform: uppercase;
+    text-shadow: 0 0 25px rgba(255,18,56,.55);
+}
+
+h2 {
+    font-size: clamp(24px, 6vw, 43px);
+    line-height: 1.2;
+}
+
+p {
+    max-width: 600px;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.rojo {
+    color: var(--rojo);
+}
+
+button {
+    background: var(--rojo);
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 17px 27px;
+    margin-top: 28px;
+    cursor: pointer;
+    clip-path: polygon(0 0, 94% 0, 100% 22%, 100% 100%, 6% 100%, 0 78%);
+    transition: transform .2s, background .2s;
+}
+
+button:hover {
+    background: #d90027;
+    transform: scale(1.04);
+}
+
+.numero {
+    font-size: clamp(100px, 25vw, 180px);
+    font-weight: 900;
+    color: var(--rojo);
+    text-shadow: 0 0 45px rgba(255,18,56,.7);
+}
+
+.logo-texto {
+    font-weight: 900;
+    font-size: clamp(30px, 8vw, 65px);
+    letter-spacing: 3px;
+}
+
+.subtitulo {
+    letter-spacing: 6px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+.destello {
+    width: 120px;
+    height: 3px;
+    background: var(--rojo);
+    box-shadow: 0 0 20px var(--rojo);
+    margin: 25px auto;
+}
+
+.boletos {
+    width: min(100%, 650px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.boleto {
+    position: relative;
+    width: min(100%, 290px);
+    min-height: 250px;
+    padding: 25px 18px;
+    background:
+        linear-gradient(135deg, #26000a, #0c0c0c 65%);
+    border: 1px solid var(--rojo);
+    outline: 1px solid rgba(255,18,56,.25);
+    outline-offset: 5px;
+    box-shadow: 0 0 30px rgba(255,18,56,.17);
+    text-align: left;
+}
+
+.boleto::before,
+.boleto::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #080808;
+    border: 1px solid var(--rojo);
+    transform: translateY(-50%);
+}
+
+.boleto::before { left: -10px; }
+.boleto::after { right: -10px; }
+
+.boleto .mini {
+    font-size: 10px;
+    color: var(--rojo);
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.boleto h3 {
+    font-size: 27px;
+    line-height: 1.05;
+    margin: 20px 0 10px;
+}
+
+.boleto .fecha {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #ddd;
+}
+
+.boleto .asiento {
+    border-top: 1px dashed #8d2034;
+    padding-top: 12px;
+    margin-top: 15px;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.nota {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 25px;
+}
+
+.corazon {
+    color: var(--rojo);
+    font-size: 38px;
+    animation: latido 1.2s infinite;
+}
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+}
+
+.progreso {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #222;
+    z-index: 10;
+}
+
+.progreso div {
+    height: 100%;
+    width: 0%;
+    background: var(--rojo);
+    transition: width .5s;
+}
+
+#particulas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.pantalla > *:not(.lineas) {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 450px) {
+    p { font-size: 16px; }
+    .boleto { min-height: 220px; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particulas"></canvas>
+
+<div class="progreso"><div id="barra"></div></div>
+
+<!-- ESCENA 1 -->
+<section class="pantalla activa fondo" id="escena1">
+    <div class="lineas"></div>
+    <div class="etiqueta">ARCHIVO CONFIDENCIAL · SOLO PARA GABY</div>
+    <h1>Gaby...<br><span class="rojo">esta sorpresa</span><br>es para ti.</h1>
+    <div class="destello"></div>
+    <p>Hay momentos que se convierten en recuerdos para toda la vida...</p>
+    <button onclick="ir(2)">DESCUBRIR MI SORPRESA ▶</button>
+</section>
+
+<!-- ESCENA 2 -->
+<section class="pantalla fondo" id="escena2">
+    <div class="lineas"></div>
+    <div class="etiqueta">INICIANDO SECUENCIA</div>
+    <h2>PREPÁRATE, GABY</h2>
+    <p>Tu papá tiene algo muy especial que contarte.</p>
+    <div class="numero" id="contador">3</div>
+    <p class="subtitulo">3 · 2 · 1 · SORPRESA</p>
+    <button onclick="ir(3)">¡ESTOY LISTA!</button>
+</section>
+
+<!-- ESCENA 3 -->
+<section class="pantalla fondo" id="escena3">
+    <div class="lineas"></div>
+    <div class="etiqueta">TU SORPRESA ES...</div>
+    <div class="logo-texto">STRAY <span class="rojo">KIDS</span></div>
+    <div class="destello"></div>
+    <h1>¡NOS VAMOS<br>A VERLOS!</h1>
+    <p>¡Vamos a disfrutar juntos el evento especial en pantalla grande!</p>
+    <button onclick="ir(4)">QUIERO VER LOS BOLETOS ❤️</button>
+</section>
+
+<!-- ESCENA 4 -->
+<section class="pantalla fondo" id="escena4">
+    <div class="lineas"></div>
+    <div class="etiqueta">UNA EXPERIENCIA INOLVIDABLE</div>
+    <h2>GABY, ¡ESTO ES PARA TI! <span class="rojo">❤️</span></h2>
+
+    <div class="boletos">
+
+        <div class="boleto">
+            <div class="mini">STRAY KIDS · LIVE VIEWING</div>
+            <h3>STRAY KIDS<br><span class="rojo">WORLD TOUR</span></h3>
+            <div class="fecha">
+                RUN IT LIVE VIEWING<br>
+                SÁBADO 7 DE NOVIEMBRE DE 2026<br>
+                12:00 P. M.
+            </div>
+            <div class="asiento">BOLETO VIRTUAL · 001</div>
+        </div>
+
+        <div class="boleto">
+            <div class="mini">STRAY KIDS · LIVE VIEWING</div>
+            <h3>STRAY KIDS<br><span class="rojo">WORLD TOUR</span></h3>
+            <div class="fecha">
+                RUN IT LIVE VIEWING<br>
+                SÁBADO 7 DE NOVIEMBRE DE 2026<br>
+                12:00 P. M.
+            </div>
+            <div class="asiento">BOLETO VIRTUAL · 002</div>
+        </div>
+
+    </div>
+
+    <p class="nota">
+        Estos boletos son una representación virtual de la sorpresa,
+        no sustituyen las entradas oficiales.
+    </p>
+
+    <button onclick="ir(5)">UN ÚLTIMO MENSAJE PARA TI ❤️</button>
+</section>
+
+<!-- ESCENA 5 -->
+<section class="pantalla fondo" id="escena5">
+    <div class="lineas"></div>
+    <div class="corazon">♥</div>
+    <div class="etiqueta">CON TODO MI AMOR</div>
+    <h1>TE QUIERO<br><span class="rojo">MUCHÍSIMO, GABY</span></h1>
+
+    <div class="destello"></div>
+
+    <p>
+        Hija, quiero verte feliz y regalarte momentos que recuerdes
+        con una sonrisa. Esta vez nos espera una aventura muy especial.
+    </p>
+
+    <p>
+        ¡Vamos a disfrutar juntos esta sorpresa y a crear un recuerdo
+        que siempre llevaremos en el corazón!
+    </p>
+
+    <h2 class="rojo">Con amor, papá. ❤️</h2>
+
+    <button onclick="reiniciar()">VOLVER A VER LA SORPRESA ↻</button>
+</section>
+
+<script>
+let escenaActual = 1;
+let temporizador = null;
+
+function ir(numero) {
+    if (temporizador) {
+        clearInterval(temporizador);
+        temporizador = null;
+    }
+
+    document.querySelectorAll(".pantalla").forEach(p => {
+        p.classList.remove("activa");
+    });
+
+    document.getElementById("escena" + numero).classList.add("activa");
+    escenaActual = numero;
+
+    document.getElementById("barra").style.width =
+        ((numero - 1) / 4 * 100) + "%";
+
+    if (numero === 2) {
+        iniciarCuenta();
+    }
+
+    window.scrollTo(0, 0);
+}
+
+function iniciarCuenta() {
+    let n = 3;
+    const elemento = document.getElementById("contador");
+    elemento.textContent = n;
+
+    temporizador = setInterval(() => {
+        n--;
+
+        if (n > 0) {
+            elemento.textContent = n;
+        } else {
+            clearInterval(temporizador);
+            temporizador = null;
+            elemento.textContent = "¡YA!";
+
+            setTimeout(() => {
+                if (escenaActual === 2) ir(3);
+            }, 900);
+        }
+    }, 1000);
+}
+
+function reiniciar() {
+    ir(1);
+}
+
+/* Partículas rojas de fondo */
+const canvas = document.getElementById("particulas");
+const ctx = canvas.getContext("2d");
+let puntos = [];
+
+function ajustarCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    puntos = Array.from({length: 45}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 0.5,
+        v: Math.random() * 0.5 + 0.2
+    }));
+}
+
+function animar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    puntos.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,18,56,0.65)";
+        ctx.fill();
+
+        p.y -= p.v;
+
+        if (p.y < 0) {
+            p.y = canvas.height;
+            p.x = Math.random() * canvas.width;
+        }
+    });
+
+    requestAnimationFrame(animar);
+}
+
+window.addEventListener("resize", ajustarCanvas);
+ajustarCanvas();
+animar();
+</script>
+
+</body>
+  </html>
